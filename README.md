@@ -1,2 +1,2 @@
 # Cursos-DIO
-Meu repositório  de estudos
+Meu repositório de estudos
