@@ -1,0 +1,100 @@
+📝Colaboração com o Github
+Deixei um breve passo a passo de como podemos criar nosso primeiro repositório e clona-lo localmente em nosso computador.
+
+Antes de tudo, o que é um repositório?
+Um repositório é o local onde contém todos os arquivos do nosso projeto. Seria como uma pastinha que guarda todos esses arquivos de nossos projeto, como os nossos projetos de software. É com eles que podemos colaborar, gerenciar nosso trabalho, acompanhar as alterações, armazenar o histórico de alterações, etc...
+
+O que são Branches?
+É uma linha de desenvolvimento separada no controle de versão. Ela permite que a gente trabalhe em modificações no código sem afetar diretamente o código principal (geralmente chamado de branch principal, como "main" ou "master"). Isso facilita o desenvolvimento simultâneo de recursos ou correções de bugs sem interferir no código estável da versão principal. Depois de concluir as alterações em uma branch, você pode mesclar essas alterações de volta ao branch principal.
+
+E o Pull Resquest e Merge?
+Um Pull Request (PR), em português, significa "Solicitação de Pull" ou "Pedido de Mesclagem". É um recurso comum em plataformas de hospedagem de código-fonte colaborativo, como o GitHub. O objetivo principal de um Pull Request é propor alterações em um repositório e solicitar que essas alterações sejam revisadas e mescladas (merged) no código principal. 
+
+Já o "merge" é uma operação no controle de versão que combina as alterações de duas branches diferentes. Quando a gente conclui o desenvolvimento em uma branch e deseja incorporar essas alterações de volta à branch principal (ou a outra branch desejada), realizamos um merge.
+
+Já o Fork?
+É basicamente uma cópia de um repositório (um projeto de software) de outra pessoa para o seu próprio espaço no GitHub. Isso permite que você faça alterações no código sem afetar o projeto original. Se você quiser contribuir de volta, pode enviar um "pull request" para que o dono do projeto original considere suas mudanças e as incorpore.
+
+E as Issues?
+As issues são usadas para rastrear tarefas, bugs, melhorias ou qualquer discussão relacionada ao código-fonte do projeto. Elas nos fornecem um meio de comunicação e colaboração entre os membros da equipe e da comunidade. As issues podem ser abertas por qualquer pessoa, incluindo desenvolvedores do projeto e usuários externos. Servem para discussões, planejamento, atribuição de tarefas e acompanhamento do progresso.
+
+Wikis no GitHub:
+Propósito: As Wikis no GitHub têm como propósito fornecer uma plataforma colaborativa para documentação de projetos. Elas são espaços onde membros da comunidade podem contribuir com informações, tutoriais e detalhes sobre o projeto, facilitando a compreensão e colaboração.
+
+Para que serve:
+
+Documentação Colaborativa: Permite que membros da comunidade contribuam para a criação e atualização da documentação do projeto.
+
+Transparência: Torna a informação acessível a todos, promovendo transparência sobre o funcionamento do projeto.
+
+Aprimoramento Contínuo: Facilita a melhoria contínua da documentação à medida que o projeto evolui.
+
+Acesso Rápido: Oferece um local centralizado para informações importantes relacionadas ao projeto.
+
+Passo a Passo para Utilizar Wikis no GitHub:
+
+Criar uma Wiki:
+
+Vá para o repositório no GitHub.
+
+Clique na aba "Wiki".
+
+Se não existir uma Wiki, você será solicitado a criar uma.
+
+Editar Conteúdo:
+
+Cada página na Wiki tem um botão "Editar".
+
+Clique em "Editar" para modificar o conteúdo.
+
+Utilize a linguagem de marcação Markdown para formatar a página.
+
+Histórico de Revisão:
+
+A Wiki mantém um histórico de revisões.
+
+É possível visualizar e reverter para versões anteriores.
+
+Controle de Acesso:
+
+Gerencie quem pode editar a Wiki através das configurações de permissões do repositório.
+
+Gists no GitHub:
+Propósito: Os Gists no GitHub são destinados a serem repositórios Git pequenos e independentes, geralmente contendo um único arquivo. Eles são úteis para compartilhar pequenos trechos de código, notas ou até mesmo scripts.
+
+Para que serve:
+
+Compartilhamento Rápido: Permite compartilhar rapidamente pequenos trechos de código ou informações.
+
+Colaboração Simples: Facilita a colaboração em pequenos projetos ou soluções específicas.
+
+Visualização Direta: Os Gists podem ser visualizados diretamente no navegador, sem a necessidade de clonar o repositório.
+
+Passo a Passo para Utilizar Gists no GitHub:
+
+Criar um Gist:
+
+Vá para a página inicial do GitHub.
+
+Clique em "Gist" no canto superior direito.
+
+Adicione seu código ou texto e forneça uma descrição.
+
+Personalização:
+
+Escolha as opções de visibilidade (público, secreto, privado).
+
+Adicione um nome de arquivo e uma descrição significativa.
+
+Salvar e Compartilhar:
+
+Clique em "Create Gist" para salvar.
+
+O Gist terá uma URL única para compartilhar.
+
+Revisões e Forks:
+
+Assim como em repositórios, os Gists mantêm um histórico de revisões e podem ser bifurcados (forked).
+
+>> Atenção <<
+Não utilizamos mais o termo "master" como o nome padrão para o branch principal, pois tem sido uma prática bastante questionada em vários contextos devido à associação histórica e simbólica do termo com a escravidão. Muitas comunidades de desenvolvimento e organizações estão buscando tornar a linguagem mais inclusiva e consciente das questões sociais.

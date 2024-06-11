@@ -1,0 +1,44 @@
+⚙️Configurando o Git
+Passo a Passo da instalação do Git e Configuração nos sistemas operacionais Windows e Linux.
+
+Instalação e Configuração do Git no Windows:
+Download:
+
+Acesse o site oficial do Git para Windows.
+
+Clique no botão "Download" para baixar o instalador.
+
+Instalação:
+
+Execute o instalador baixado.
+
+Siga as instruções na tela, aceitando as configurações padrão, a menos que você tenha uma razão específica para alterá-las.
+
+Configuração Inicial:
+
+Após a instalação, abra o "Git Bash" (um terminal Git para Windows).
+
+Configure seu nome de usuário e endereço de e-mail:
+
+Copy
+git config --global user.name "Seu Nome"
+git config --global user.email "seu@email.com"
+Instalação e Configuração do Git no Linux:
+Instalação via Terminal:
+
+Em distribuições baseadas no Debian (como Ubuntu):
+
+Copy
+sudo apt-get update
+sudo apt-get install git
+Em distribuições baseadas no Red Hat (como Fedora):
+
+Copy
+sudo yum install git
+Configuração Inicial:
+
+Abra um terminal e configure seu nome de usuário e endereço de e-mail:
+
+Copy
+git config --global user.name "Seu Nome"
+git config --global user.email "seu@email.com"
