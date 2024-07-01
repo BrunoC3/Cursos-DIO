@@ -1,0 +1,14 @@
+{
+  "name": "javascriptdeveloper",
+  "version": "1.0.0",
+  "description": "Revisão de JS",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "pagamento": "node 06_Importação/pagamento.js",
+    "ParouImpar": "node 06_Importação/ParouImpar.js"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}
