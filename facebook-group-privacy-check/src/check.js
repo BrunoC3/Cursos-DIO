@@ -24,7 +24,7 @@ async function getGroupDetails(groupUrl) {
     const page = await browser.newPage();
 
     try {
-        await loadCookies(page); // Carregar os cookies salvos
+        await loadCookies(page);
 
         await page.goto(groupUrl, { waitUntil: 'networkidle2' });
 
@@ -42,7 +42,7 @@ async function getGroupDetails(groupUrl) {
         });
 
         if (groupDetails.groupName && groupDetails.privacyStatus) {
-            await saveCookies(page); // Salvar os cookies após a operação
+            await saveCookies(page);
             return groupDetails;
         } else {
             return 'Grupo não encontrado';
@@ -56,10 +56,10 @@ async function getGroupDetails(groupUrl) {
 }
 
 async function scrollToElementAndCollect(page, feedSelector, messageSelector, imageSelector, minItemCount) {
-    let itemsWithMessagesAndImages = []; // Array para armazenar itens, mensagens e imagens
+    let itemsWithMessagesAndImages = [];
 
-    const scrollDelay = 2000; // Tempo em milissegundos entre os scrolls
-    const maxScrolls = 50; // Número máximo de scrolls permitidos
+    const scrollDelay = 2000;
+    const maxScrolls = 50;
 
     try {
         let previousItemsCount = 0;
@@ -67,33 +67,51 @@ async function scrollToElementAndCollect(page, feedSelector, messageSelector, im
 
         while (itemsWithMessagesAndImages.length < minItemCount && scrollAttempts < maxScrolls) {
             await autoScroll(page);
+
+            // Capturar elementos visíveis
             const newItems = await page.$$eval(feedSelector, elements => elements.map(el => el.textContent.trim()));
             const newMessages = await page.$$eval(messageSelector, elements => elements.map(el => el.textContent.trim()));
             const newImages = await page.$$eval(imageSelector, elements => elements.map(el => el.getAttribute('src')));
 
+            // Capturar datas e horas das publicações
+            const newPostDetails = await page.$$eval(feedSelector, elements => elements.map(el => {
+                const timestampElement = el.closest('[data-time]');
+                return {
+                    post: el.textContent.trim(),
+                    timestamp: timestampElement ? new Date(parseInt(timestampElement.getAttribute('data-time')) * 1000) : null
+                };
+            }));
+
+            // Adicionar itens à lista
             for (let i = 0; i < newItems.length; i++) {
                 const item = newItems[i];
                 const message = newMessages[i] || '';
                 const imageSrc = newImages[i] || '';
+                const timestamp = newPostDetails[i].timestamp;
 
-                itemsWithMessagesAndImages.push({ item, message, imageSrc });
+                itemsWithMessagesAndImages.push({
+                    item,
+                    message,
+                    imageSrc,
+                    timestamp
+                });
 
                 if (imageSrc) {
-                    await downloadAndSaveImage(imageSrc, item);
+                    downloadAndSaveImage(imageSrc, item);
                 }
             }
 
             if (itemsWithMessagesAndImages.length > previousItemsCount) {
                 previousItemsCount = itemsWithMessagesAndImages.length;
                 console.log(`Total de itens coletados: ${itemsWithMessagesAndImages.length}`);
-                await saveItemsToFile(itemsWithMessagesAndImages, OUTPUT_FILE);
+                saveItemsToFile(itemsWithMessagesAndImages, OUTPUT_FILE);
             }
 
             scrollAttempts++;
-            await sleep(scrollDelay); // Aguarda antes de realizar o próximo scroll
+            await sleep(scrollDelay);
         }
 
-        return itemsWithMessagesAndImages.slice(0, minItemCount); // Retorna a quantidade mínima desejada de itens
+        return itemsWithMessagesAndImages.slice(0, minItemCount);
     } catch (error) {
         console.error('Erro ao obter os itens do feed:', error);
         return [];
@@ -128,7 +146,7 @@ async function autoScroll(page) {
 async function saveItemsToFile(items, fileName) {
     try {
         const formattedItems = items.map(item => `${item.item}\n${item.message}\n`).join('\n');
-        fs.writeFileSync(fileName, formattedItems, { flag: 'a' }); // Append mode
+        fs.writeFileSync(fileName, formattedItems, { flag: 'a' }); 
         console.log(`Itens salvos em ${fileName}`);
     } catch (error) {
         console.error('Erro ao salvar itens em arquivo:', error);
@@ -140,7 +158,7 @@ async function downloadAndSaveImage(imageUrl, itemName) {
         const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
         const imageExtension = path.extname(imageUrl.split('?')[0]);
         const imageName = `${itemName.replace(/\W/g, '')}${imageExtension}`;
-        const imagePath = path.join(__dirname, IMAGES_FOLDER, imageName); // Salvar no diretório atual
+        const imagePath = path.join(__dirname, IMAGES_FOLDER, imageName); 
 
         fs.writeFileSync(imagePath, response.data);
         console.log(`Imagem salva: ${imageName}`);
@@ -154,7 +172,7 @@ async function getFeedItems(groupUrl, feedSelector, messageSelector, imageSelect
     const page = await browser.newPage();
 
     try {
-        await loadCookies(page); // Carregar os cookies salvos
+        await loadCookies(page);
 
         await page.goto(groupUrl, { waitUntil: 'networkidle2' });
 
@@ -175,12 +193,11 @@ function sleep(ms) {
 (async () => {
     const groupUrl = 'https://www.facebook.com/groups/2445080325767922';
     const feedSelector = 'strong.html-strong.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.xexx8yu.x4uap5.x18d9i69.xkhd6sd.x1hl2dhg.x16tdsg8.x1vvkbs.x1s688f span.html-span.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.xexx8yu.x4uap5.x18d9i69.xkhd6sd.x1hl2dhg.x16tdsg8.x1vvkbs';
-    const messageSelector = 'div.html-div.xe8uvvx.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.xexx8yu.x4uap5.x18d9i69.xkhd6sd div.x1iorvi4.x1pi30zi.x1l90r2v.x1swvt13 span.x193iq5w.xeuugli.x13faqbe.x1vvkbs.x1xmvt09.x1lliihq.x1s928wv.xhkezso.x1gmr53x.x1cpjm7i.x1fgarty.x1943h6x.xudqn12.x3x7a5m.x6prxxf.xvq8zen.xo1l8bm.xzsf02u.x1yc453h';
+    const messageSelector = 'div.html-div.xe8uvvx.xdj266r.x11i5rnm.xat24cr.x1mh8g0r.xexx8yu.x4uap5.x18d9i69.xkhd6sd';
     const imageSelector = 'img.x1ey2m1c.xds687c.x5yr21d.x10l6tqk.x17qophe.x13vifvy.xh8yej3.xl1xv1r';
 
-    const minItemCount = 30; // Quantidade mínima de itens desejada
+    const minItemCount = 30;
 
-    // Exemplo de uso para obter detalhes do grupo
     const groupDetails = await getGroupDetails(groupUrl);
     if (typeof groupDetails === 'string') {
         console.log(groupDetails);
@@ -189,7 +206,6 @@ function sleep(ms) {
         console.log(`Status de privacidade: ${groupDetails.privacyStatus}`);
     }
 
-    // Exemplo de uso para obter itens do feed com mensagens e imagens associadas
     const itemsWithMessagesAndImages = await getFeedItems(groupUrl, feedSelector, messageSelector, imageSelector, minItemCount);
     console.log('Itens do feed com mensagens e imagens associadas:');
     console.log(itemsWithMessagesAndImages);
